@@ -1,4 +1,3 @@
-# YOU NEED TO EDIT THESE
 AUTHOR = 'Chris Dent'
 AUTHOR_EMAIL = 'cdent@peermore.com'
 NAME = 'tiddlywebplugins.cookiedomain'
@@ -24,5 +23,6 @@ setup(
     packages = find_packages(exclude=['test']),
     platforms = 'Posix; MacOS X; Windows',
     install_requires = ['setuptools', 'tiddlyweb'],
-    zip_safe = False
+    zip_safe = False,
+    license = 'BSD'
     )
