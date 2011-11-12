@@ -5,8 +5,14 @@ import httplib2
 from tiddlyweb.store import Store
 from tiddlyweb.model.user import User
 
+from tiddlywebplugins.utils import get_store
+
+import os, shutil
+
 
 def setup_module(module):
+    if os.path.exists('store'):
+        shutil.rmtree('store')
     from tiddlyweb.config import config
     from tiddlyweb.web import serve
     # we have to have a function that returns the callable,
@@ -15,8 +21,7 @@ def setup_module(module):
         return serve.load_app()
     httplib2_intercept.install()
     wsgi_intercept.add_wsgi_intercept('0.0.0.0', 8080, app_fn)
-    module.store = Store(config['server_store'][0],
-            config['server_store'][1], {'tiddlyweb.config': config})
+    module.store = get_store(config)
     user = User('cdent')
     user.set_password('cow')
     module.store.put(user)
